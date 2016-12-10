@@ -6,10 +6,12 @@ metadata:
     app: jupyter
 spec:
   ports:
-    - port: 80
-  type: NodePort
+  - port: 80
+    name: http
+    targetPort: 8888
   selector:
     app: jupyter
+  type: NodePort
 ---
 apiVersion: v1
 kind: Pod
@@ -20,7 +22,11 @@ metadata:
 spec:
   containers:
     - name: jupyter
-      image: skippbox/jupyter:0.0.1
+      image: skippbox/jupyter:0.0.3
+      ports:
+      - containerPort: 8888
+        protocol: TCP
+        name: http
       volumeMounts:
         - mountPath: /root
           name: notebook-volume
