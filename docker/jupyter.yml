@@ -30,12 +30,6 @@ spec:
       volumeMounts:
         - mountPath: /root
           name: notebook-volume
-    - name: proxy
-      image: kelseyhightower/kubectl:1.4.0
-      args:
-        - proxy
-        - -p
-        - "8080"
   volumes:
   - name: notebook-volume
     gitRepo:
